@@ -1,0 +1,130 @@
+@import "tailwindcss";
+
+/* ═══════════════════════════════════════════════════════════════════════════════
+   RESET - Asegurar que no hay restricciones de ancho/alto
+   ═══════════════════════════════════════════════════════════════════════════════ */
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════════
+   AEIS - CSS VARIABLES (solo variables, no estilos globales)
+   ═══════════════════════════════════════════════════════════════════════════════ */
+
+:root {
+  /* Core System Colors */
+  --deep-navy: #0A192F;
+  --deep-navy-light: #112240;
+  --deep-navy-lighter: #1D3557;
+  --circuit-green: #00FF9D;
+  --circuit-green-dim: #00CC7D;
+  --circuit-green-glow: rgba(0, 255, 157, 0.3);
+  
+  /* Status Colors */
+  --error-red: #FF4444;
+  --warning-yellow: #FFD93D;
+  --success-green: var(--circuit-green);
+  
+  /* Text Colors */
+  --text-primary: #FFFFFF;
+  --text-secondary: #8892B0;
+  --text-muted: #495670;
+  
+  /* UI Elements */
+  --border-color: #233554;
+  --card-bg: rgba(17, 34, 64, 0.8);
+  --input-bg: rgba(10, 25, 47, 0.9);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════════
+   KEYFRAMES - Animaciones reutilizables
+   ═══════════════════════════════════════════════════════════════════════════════ */
+
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+@keyframes glow {
+  0%, 100% { 
+    box-shadow: 0 0 5px var(--circuit-green), 0 0 10px var(--circuit-green-glow);
+  }
+  50% { 
+    box-shadow: 0 0 20px var(--circuit-green), 0 0 30px var(--circuit-green-glow);
+  }
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════════
+   CLASES DE ANIMACIÓN - Solo para componentes que las necesiten
+   ═══════════════════════════════════════════════════════════════════════════════ */
+
+.animate-blink {
+  animation: blink 1s step-end infinite;
+}
+
+.animate-glow {
+  animation: glow 2s ease-in-out infinite;
+}
+
+.animate-spin-slow {
+  animation: spin-slow 10s linear infinite;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════════
+   CURSOR - Usado en componentes de terminal
+   ═══════════════════════════════════════════════════════════════════════════════ */
+
+.cursor {
+  display: inline-block;
+  width: 10px;
+  height: 20px;
+  background-color: var(--circuit-green);
+  animation: blink 1s step-end infinite;
+  margin-left: 2px;
+  vertical-align: middle;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════════
+   TERMINAL WINDOW - Componente específico
+   ═══════════════════════════════════════════════════════════════════════════════ */
+
+.terminal-window {
+  background: var(--card-bg);
+  border: 1px solid var(--circuit-green);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 0 20px var(--circuit-green-glow);
+}
+
+.terminal-header {
+  background: var(--deep-navy-light);
+  padding: 10px 15px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.terminal-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.terminal-dot.red { background: #FF5F56; }
+.terminal-dot.yellow { background: #FFBD2E; }
+.terminal-dot.green { background: #27C93F; }
